@@ -1,16 +1,14 @@
-import { StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
-import SignUpScreen from './src/screens/auth/SignUpScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthStack from './src/navigation/AuthStack';
 
 export default function App() {
   return (
     <>
-      <FlashMessage position="top" />
-      <SignUpScreen />
+      <NavigationContainer>
+        <FlashMessage position="top" />
+        <AuthStack />
+      </NavigationContainer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
