@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-native/all",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "react-native",
+    "prettier"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    // Disable this rule for React 17+
+    "react/jsx-runtime": "error"
+    // Make sure to use the new JSX Transform
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "react-native/react-native": true
+  }
+}
