@@ -1,13 +1,13 @@
 import FlashMessage from 'react-native-flash-message';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './src/navigation/AuthStack';
+import MainAppStack from './src/navigation/MainAppStack';
 
 export default function App() {
   return (
     <>
       <NavigationContainer>
         <FlashMessage position="top" />
-        <AuthStack />
+        <MainAppStack />
       </NavigationContainer>
     </>
   );
