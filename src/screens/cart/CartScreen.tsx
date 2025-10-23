@@ -4,6 +4,7 @@ import AppSafeView from '../../components/views/AppSafeView';
 import HomeHeader from '../../components/headers/HomeHeader';
 import EmptyCart from './EmptyCart';
 import CartItem from '../../components/cart/CartItem';
+import TotalView from '../../components/cart/TotalView';
 
 const CartScreen = () => {
   return (
@@ -11,6 +12,7 @@ const CartScreen = () => {
       <HomeHeader />
       {/* <EmptyCart /> */}
       <CartItem />
+      <TotalView />
     </AppSafeView>
   );
 };
