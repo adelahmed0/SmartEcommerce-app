@@ -8,7 +8,7 @@ const HomeScreen = () => {
   return (
     <AppSafeView>
       <HomeHeader />
-      <ProductCard />
+      {/* <ProductCard /> */}
     </AppSafeView>
   );
 };
