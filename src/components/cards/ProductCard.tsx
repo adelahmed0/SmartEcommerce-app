@@ -10,7 +10,7 @@ import { commonStyles } from '../../styles/sharedStyles';
 interface IProductCard {
   imageURL: string;
   title: string;
-  price: string;
+  price: number;
   onAddToCart: () => void;
 }
 
