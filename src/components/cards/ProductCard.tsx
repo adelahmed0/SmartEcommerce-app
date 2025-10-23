@@ -5,6 +5,7 @@ import { AppColors } from '../../styles/colors';
 import AppText from '../texts/AppText';
 import { AppFonts } from '../../styles/fonts';
 import { Ionicons } from '@expo/vector-icons';
+import { commonStyles } from '../../styles/sharedStyles';
 
 const ProductCard = () => {
   return (
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     height: vs(190),
     backgroundColor: AppColors.white,
     borderRadius: s(10),
-    borderWidth: 1,
+    ...commonStyles.shadow,
   },
   imageContainer: {
     overflow: 'hidden',
