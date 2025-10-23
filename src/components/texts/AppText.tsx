@@ -2,6 +2,7 @@ import { StyleSheet, Text, TextProps, TextStyle } from 'react-native';
 import { s } from 'react-native-size-matters';
 import { ReactNode, FC } from 'react';
 import { AppColors } from '../../styles/colors';
+import { AppFonts } from '../../styles/fonts';
 
 interface AppTextProps extends TextProps {
   children: ReactNode;
@@ -25,9 +26,11 @@ const styles = StyleSheet.create({
   bold: {
     fontSize: s(18),
     color: AppColors.black,
+    fontFamily: AppFonts.bold,
   },
   medium: {
     fontSize: s(16),
     color: AppColors.black,
+    fontFamily: AppFonts.medium,
   },
 });
