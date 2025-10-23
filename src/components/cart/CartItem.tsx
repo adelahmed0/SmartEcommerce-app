@@ -4,7 +4,7 @@ import { s, vs } from 'react-native-size-matters';
 import AppText from '../texts/AppText';
 import { AppFonts } from '../../styles/fonts';
 import { AppColors } from '../../styles/colors';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
 const product = {
   id: 1,
@@ -28,6 +28,15 @@ const CartItem = () => {
       <View style={styles.detailsContainer}>
         <AppText style={styles.textTitle}>{product.title}</AppText>
         <AppText style={styles.textPrice}>{product.price} EGP</AppText>
+        <View style={styles.quantityContainer}>
+          <Pressable style={styles.iconButton}>
+            <FontAwesome name="plus" size={s(10)} color={AppColors.primary} />
+          </Pressable>
+          <AppText style={styles.quantityText}>1</AppText>
+          <Pressable style={styles.iconButton}>
+            <FontAwesome name="minus" size={s(10)} color={AppColors.primary} />
+          </Pressable>
+        </View>
       </View>
       <View style={styles.deleteContainer}>
         <Pressable onPress={() => {}} style={styles.deleteButton}>
@@ -90,5 +99,30 @@ const styles = StyleSheet.create({
   deleteButton: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: s(5),
+    borderRadius: s(30),
+    borderWidth: s(1),
+    borderColor: AppColors.borderColor,
+    width: s(80),
+    paddingVertical: vs(5),
+  },
+  iconButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: AppColors.lightGray,
+    padding: s(5),
+    width: s(20),
+    height: s(20),
+    borderRadius: s(10),
+  },
+  quantityText: {
+    flex: 1,
+    textAlign: 'center',
+    color: AppColors.primary,
   },
 });
