@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import AppSafeView from '../../components/views/AppSafeView';
 import HomeHeader from '../../components/headers/HomeHeader';
@@ -8,8 +8,10 @@ import AppText from '../../components/texts/AppText';
 import { s, vs } from 'react-native-size-matters';
 import { AppFonts } from '../../styles/fonts';
 import { AppColors } from '../../styles/colors';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
+  const navigation = useNavigation<NavigationProp<any>>();
   return (
     <AppSafeView>
       <HomeHeader />
@@ -17,7 +19,10 @@ const ProfileScreen = () => {
         Hello, User
       </AppText>
       <View style={{ paddingHorizontal: sharedPaddingHorizontal }}>
-        <ProfileSectionButton onPress={() => {}} title="My Orders" />
+        <ProfileSectionButton
+          onPress={() => navigation.navigate('MyOrdersScreen')}
+          title="My Orders"
+        />
         <ProfileSectionButton onPress={() => {}} title="Language" />
         <ProfileSectionButton onPress={() => {}} title="Logout" />
       </View>
