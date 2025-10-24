@@ -9,16 +9,20 @@ import { products } from '../../data/products';
 import { sharedPaddingHorizontal } from '../../styles/sharedStyles';
 import AppButton from '../../components/buttons/AppButton';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const CartScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
+  const { items } = useSelector((state: RootState) => state.cartSlice);
+  console.log(items);
   return (
     <AppSafeView>
       <HomeHeader />
       {/* <EmptyCart /> */}
       <View style={{ paddingHorizontal: sharedPaddingHorizontal, flex: 1 }}>
         <FlatList
-          data={products}
+          data={items}
           renderItem={({ item }) => <CartItem {...item} />}
           keyExtractor={(item) => item.id.toString()}
         />
