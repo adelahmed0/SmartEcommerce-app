@@ -2,15 +2,37 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import AppSafeView from '../../components/views/AppSafeView';
 import HomeHeader from '../../components/headers/HomeHeader';
+import ProfileSectionButton from '../../components/buttons/ProfileSectionButton';
+import { sharedPaddingHorizontal } from '../../styles/sharedStyles';
+import AppText from '../../components/texts/AppText';
+import { s, vs } from 'react-native-size-matters';
+import { AppFonts } from '../../styles/fonts';
+import { AppColors } from '../../styles/colors';
 
 const ProfileScreen = () => {
   return (
     <AppSafeView>
       <HomeHeader />
+      <AppText variant="bold" style={styles.helloText}>
+        Hello, User
+      </AppText>
+      <View style={{ paddingHorizontal: sharedPaddingHorizontal }}>
+        <ProfileSectionButton onPress={() => {}} title="My Orders" />
+        <ProfileSectionButton onPress={() => {}} title="Language" />
+        <ProfileSectionButton onPress={() => {}} title="Logout" />
+      </View>
     </AppSafeView>
   );
 };
 
 export default ProfileScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  helloText: {
+    fontSize: s(18),
+    color: AppColors.primary,
+    fontFamily: AppFonts.bold,
+    marginTop: vs(10),
+    marginHorizontal: sharedPaddingHorizontal,
+  },
+});
