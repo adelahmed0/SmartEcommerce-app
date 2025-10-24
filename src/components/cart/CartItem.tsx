@@ -6,7 +6,6 @@ import { AppFonts } from '../../styles/fonts';
 import { AppColors } from '../../styles/colors';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
-
 interface ICartItem {
   title: string;
   price: number | string;
@@ -38,7 +37,7 @@ const CartItem: FC<ICartItem> = ({
       </View>
       <View style={styles.detailsContainer}>
         <AppText style={styles.textTitle}>{title}</AppText>
-        <AppText style={styles.textPrice}>{price} EGP</AppText>
+        <AppText style={styles.textPrice}>{price} $</AppText>
         <View style={styles.quantityContainer}>
           <Pressable onPress={onIncrementPress} style={styles.iconButton}>
             <FontAwesome name="plus" size={s(10)} color={AppColors.primary} />

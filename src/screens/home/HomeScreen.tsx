@@ -5,8 +5,11 @@ import HomeHeader from '../../components/headers/HomeHeader';
 import ProductCard from '../../components/cards/ProductCard';
 import { products } from '../../data/products';
 import { s, vs } from 'react-native-size-matters';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../store/reducers/cartSlice';
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
   return (
     <AppSafeView>
       <HomeHeader />
@@ -19,7 +22,9 @@ const HomeScreen = () => {
             imageURL={item.imageURL}
             title={item.title}
             price={item.price}
-            onAddToCart={() => {}}
+            onAddToCart={() => {
+              dispatch(addItemToCart(item));
+            }}
           />
         )}
         keyExtractor={(item) => item.id.toString()}

@@ -15,7 +15,7 @@ import { RootState } from '../../store/store';
 const CartScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const { items } = useSelector((state: RootState) => state.cartSlice);
-  console.log(items);
+
   return (
     <AppSafeView>
       <HomeHeader />
@@ -23,7 +23,15 @@ const CartScreen = () => {
       <View style={{ paddingHorizontal: sharedPaddingHorizontal, flex: 1 }}>
         <FlatList
           data={items}
-          renderItem={({ item }) => <CartItem {...item} />}
+          renderItem={({ item }) => (
+            <CartItem
+              {...item}
+              price={item.sum}
+              onIncrementPress={() => {}}
+              onDecrementPress={() => {}}
+              onDeletePress={() => {}}
+            />
+          )}
           keyExtractor={(item) => item.id.toString()}
         />
         <TotalView itemsPrice={100} orderTotal={100} />
