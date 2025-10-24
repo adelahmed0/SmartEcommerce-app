@@ -22,12 +22,12 @@ const cartSlice = createSlice({
   reducers: {
     // add item to cart
     addItemToCart: (state, action) => {
-      const isItemExist = state.items.find(
+      const existingItem = state.items.find(
         (item) => item.id === action.payload.id,
       );
-      if (isItemExist) {
-        isItemExist.quantity++;
-        isItemExist.sum += action.payload.price;
+      if (existingItem) {
+        existingItem.quantity++;
+        existingItem.sum += action.payload.price;
       } else {
         state.items.push({
           ...action.payload,
@@ -36,12 +36,27 @@ const cartSlice = createSlice({
         });
       }
     },
+
     // remove item from cart
+    removeItemFromCart: (state, action) => {
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload.id,
+      );
+      if (existingItem && existingItem.quantity != 1) {
+        existingItem.quantity -= 1;
+        existingItem.sum -= action.payload.price;
+      } else {
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.id,
+        );
+      }
+    },
+
     // remove product from cart
     // empty cart
   },
 });
 
-export const { addItemToCart } = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

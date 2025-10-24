@@ -9,13 +9,14 @@ import { products } from '../../data/products';
 import { sharedPaddingHorizontal } from '../../styles/sharedStyles';
 import AppButton from '../../components/buttons/AppButton';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { removeItemFromCart } from '../../store/reducers/cartSlice';
 
 const CartScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const { items } = useSelector((state: RootState) => state.cartSlice);
-
+  const dispatch = useDispatch();
   return (
     <AppSafeView>
       <HomeHeader />
@@ -28,7 +29,9 @@ const CartScreen = () => {
               {...item}
               price={item.sum}
               onIncrementPress={() => {}}
-              onDecrementPress={() => {}}
+              onDecrementPress={() => {
+                dispatch(removeItemFromCart(item));
+              }}
               onDeletePress={() => {}}
             />
           )}
