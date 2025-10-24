@@ -1,33 +1,28 @@
 import { KeyboardTypeOptions, StyleSheet } from 'react-native';
-import React, { FC } from 'react';
-import {
-  Control,
-  Controller,
-  FieldValues,
-  RegisterOptions,
-} from 'react-hook-form';
+import React from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import AppTextInput from './AppTextInput';
 import { AppColors } from '../../styles/colors';
 import AppText from '../texts/AppText';
 import { s, vs } from 'react-native-size-matters';
 
-interface AppTextInputControllerProps {
-  control: Control<FieldValues>;
-  name: string;
-  rules?: RegisterOptions<FieldValues>;
+interface AppTextInputControllerProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
+  rules?: object;
   placeholder: string;
   secureTextEntry?: boolean;
   keyboardType?: KeyboardTypeOptions;
 }
 
-const AppTextInputController: FC<AppTextInputControllerProps> = ({
+const AppTextInputController = <T extends FieldValues>({
   control,
   name,
   rules,
   placeholder,
   secureTextEntry,
   keyboardType,
-}) => {
+}: AppTextInputControllerProps<T>) => {
   return (
     <Controller
       control={control}
