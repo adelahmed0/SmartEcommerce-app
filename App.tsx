@@ -4,6 +4,8 @@ import MainAppStack from './src/navigation/MainAppStack';
 import { useFonts } from 'expo-font';
 import { ActivityIndicator } from 'react-native';
 import { AppColors } from './src/styles/colors';
+import { store } from './src/store/store';
+import { Provider } from 'react-redux';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,10 +19,12 @@ export default function App() {
 
   return (
     <>
-      <NavigationContainer>
-        <FlashMessage position="top" />
-        <MainAppStack />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <FlashMessage position="top" />
+          <MainAppStack />
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }
