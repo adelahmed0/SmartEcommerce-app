@@ -35,7 +35,7 @@ const ProductCard: FC<IProductCard> = ({
       </View>
       <View style={styles.detailsContainer}>
         <AppText style={styles.titleText}>{title}</AppText>
-        <AppText style={styles.priceText}>{price} EGP</AppText>
+        <AppText style={styles.priceText}>{price} $</AppText>
       </View>
     </View>
   );
