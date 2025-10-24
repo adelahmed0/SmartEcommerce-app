@@ -33,14 +33,10 @@ const AppTextInputController: FC<AppTextInputControllerProps> = ({
       control={control}
       name={name}
       rules={rules}
-      render={({
-        field: { onChange, onBlur, value },
-        fieldState: { error },
-      }) => (
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
         <>
           <AppTextInput
             onChangeText={onChange}
-            onBlur={onBlur}
             value={value}
             placeholder={placeholder}
             secureTextEntry={secureTextEntry}
