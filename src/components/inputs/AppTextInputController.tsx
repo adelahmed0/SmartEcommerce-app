@@ -7,6 +7,9 @@ import {
   RegisterOptions,
 } from 'react-hook-form';
 import AppTextInput from './AppTextInput';
+import { AppColors } from '../../styles/colors';
+import AppText from '../texts/AppText';
+import { s, vs } from 'react-native-size-matters';
 
 interface AppTextInputControllerProps {
   control: Control<FieldValues>;
@@ -34,14 +37,18 @@ const AppTextInputController: FC<AppTextInputControllerProps> = ({
         field: { onChange, onBlur, value },
         fieldState: { error },
       }) => (
-        <AppTextInput
-          onChangeText={onChange}
-          onBlur={onBlur}
-          value={value}
-          placeholder={placeholder}
-          secureTextEntry={secureTextEntry}
-          keyboardType={keyboardType}
-        />
+        <>
+          <AppTextInput
+            onChangeText={onChange}
+            onBlur={onBlur}
+            value={value}
+            placeholder={placeholder}
+            secureTextEntry={secureTextEntry}
+            keyboardType={keyboardType}
+            style={error && styles.errorInput}
+          />
+          {error && <AppText style={styles.errorText}>{error.message}</AppText>}
+        </>
       )}
     />
   );
@@ -49,4 +56,15 @@ const AppTextInputController: FC<AppTextInputControllerProps> = ({
 
 export default AppTextInputController;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  errorInput: {
+    borderColor: AppColors.error,
+  },
+  errorText: {
+    color: AppColors.error,
+    fontSize: s(12),
+    textAlign: 'center',
+    marginBottom: vs(10),
+    marginTop: -vs(6),
+  },
+});
