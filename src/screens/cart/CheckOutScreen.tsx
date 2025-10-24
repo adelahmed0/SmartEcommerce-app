@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import AppSafeView from '../../components/views/AppSafeView';
 import {
   commonStyles,
@@ -7,37 +7,41 @@ import {
 } from '../../styles/sharedStyles';
 import { s, vs } from 'react-native-size-matters';
 import { AppColors } from '../../styles/colors';
-import AppTextInput from '../../components/inputs/AppTextInput';
+import AppTextInputController from '../../components/inputs/AppTextInputController';
 import AppButton from '../../components/buttons/AppButton';
 import { IS_IOS } from '../../constants/constants';
+import { FieldValues, useForm } from 'react-hook-form';
 
 const CheckOutScreen = () => {
-  const [fullName, setFullName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [detailedAddress, setDetailedAddress] = useState('');
+  const { control, handleSubmit } = useForm({});
+
+  const saveOrder = (formData: FieldValues) => {
+    console.log('saveOrder', formData);
+  };
+
   return (
     <AppSafeView>
       <View style={{ paddingHorizontal: sharedPaddingHorizontal }}>
         <View style={styles.inputContainer}>
-          <AppTextInput
+          <AppTextInputController
+            name="fullName"
             placeholder="Full Name"
-            value={fullName}
-            onChangeText={setFullName}
+            control={control}
           />
-          <AppTextInput
+          <AppTextInputController
+            name="phoneNumber"
             placeholder="Phone Number"
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
+            control={control}
           />
-          <AppTextInput
+          <AppTextInputController
+            name="detailedAddress"
             placeholder="Detailed Address"
-            value={detailedAddress}
-            onChangeText={setDetailedAddress}
+            control={control}
           />
         </View>
       </View>
       <View style={styles.bottomButtonContainer}>
-        <AppButton title="Confirm" onPress={() => {}} />
+        <AppButton title="Confirm" onPress={handleSubmit(saveOrder)} />
       </View>
     </AppSafeView>
   );
