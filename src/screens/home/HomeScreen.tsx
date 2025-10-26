@@ -1,15 +1,24 @@
 import { StyleSheet, FlatList } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppSafeView from '../../components/views/AppSafeView';
 import HomeHeader from '../../components/headers/HomeHeader';
 import ProductCard from '../../components/cards/ProductCard';
-import { products } from '../../data/products';
 import { s, vs } from 'react-native-size-matters';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../store/reducers/cartSlice';
+import { getProductsData } from '../../config/dataServices';
+import { Product } from '../../types/product';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const [products, setProducts] = useState<Product[]>([]);
+  const fetchData = async () => {
+    const data = await getProductsData();
+    setProducts(data as Product[]);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <AppSafeView>
       <HomeHeader />
