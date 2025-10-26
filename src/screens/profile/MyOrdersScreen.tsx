@@ -4,6 +4,7 @@ import { sharedPaddingHorizontal } from '../../styles/sharedStyles';
 import OrderItem from '../../components/cart/OrderItem';
 import AppSafeView from '../../components/views/AppSafeView';
 import { fetchUserOrders } from '../../config/dataServices';
+import { getDateFromFirebaseTimestamp } from '../../helpers/dateTimeHelper';
 
 const MyOrdersScreen = () => {
   // Dummy data for rendering the component
@@ -47,7 +48,7 @@ const MyOrdersScreen = () => {
         keyExtractor={(item, index) => item?.id.toString()}
         renderItem={({ item }) => (
           <OrderItem
-            date={item.createdAt.toDate().toLocaleDateString()}
+            date={getDateFromFirebaseTimestamp(item.createdAt)}
             totalAmount={item.totalProductsPriceSum}
             totalPrice={item.totalPrice}
             style={{ marginBottom: 10 }}
