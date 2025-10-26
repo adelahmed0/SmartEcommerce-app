@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserData, setIsLoading } from '../store/reducers/userSlice';
 import { useEffect } from 'react';
 import { RootState } from '../store/store';
+import { ActivityIndicator, View } from 'react-native';
+import { AppColors } from '../styles/colors';
 
 const Stack = createStackNavigator();
 
@@ -37,7 +39,11 @@ export default function MainAppStack() {
   }, []);
 
   if (isLoading) {
-    return null;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={AppColors.primary} />
+      </View>
+    );
   }
 
   return (

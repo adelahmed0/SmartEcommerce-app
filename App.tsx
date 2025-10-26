@@ -2,7 +2,7 @@ import FlashMessage from 'react-native-flash-message';
 import { NavigationContainer } from '@react-navigation/native';
 import MainAppStack from './src/navigation/MainAppStack';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, Platform } from 'react-native';
+import { ActivityIndicator, Platform, View } from 'react-native';
 import { AppColors } from './src/styles/colors';
 import { store } from './src/store/store';
 import { Provider } from 'react-redux';
@@ -17,7 +17,11 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <ActivityIndicator size="large" color={AppColors.primary} />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={AppColors.primary} />
+      </View>
+    );
   }
 
   return (
