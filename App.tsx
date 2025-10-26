@@ -2,10 +2,11 @@ import FlashMessage from 'react-native-flash-message';
 import { NavigationContainer } from '@react-navigation/native';
 import MainAppStack from './src/navigation/MainAppStack';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Platform } from 'react-native';
 import { AppColors } from './src/styles/colors';
 import { store } from './src/store/store';
 import { Provider } from 'react-redux';
+import { vs } from 'react-native-size-matters';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +22,9 @@ export default function App() {
     <>
       <Provider store={store}>
         <NavigationContainer>
-          <FlashMessage position="top" />
+          <FlashMessage
+            position={Platform.OS === 'ios' ? 'top' : { top: vs(40) }}
+          />
           <MainAppStack />
         </NavigationContainer>
       </Provider>

@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import { showMessage } from 'react-native-flash-message';
 
 const schema = yup
   .object({
@@ -46,10 +47,46 @@ const SignInScreen = () => {
         formData.email,
         formData.password,
       );
-      navigation.navigate('MainAppBottomTabs');
+
       console.log('Sign In Success:', userCredential);
-    } catch (error) {
-      console.log('Sign In Error:', error);
+      navigation.navigate('MainAppBottomTabs');
+    } catch (error: any) {
+      let errorMessage =
+        'An error occurred while signing in. Please try again.';
+
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address.';
+          break;
+        case 'auth/missing-email':
+          errorMessage = 'Please enter your email.';
+          break;
+        case 'auth/missing-password':
+          errorMessage = 'Please enter your password.';
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Incorrect password.';
+          break;
+        case 'auth/user-not-found':
+          errorMessage = 'No user found with this email.';
+          break;
+        case 'auth/user-disabled':
+          errorMessage = 'This account has been disabled.';
+          break;
+        case 'auth/too-many-requests':
+          errorMessage = 'Too many attempts. Please try again later.';
+          break;
+        case 'auth/network-request-failed':
+          errorMessage = 'Network error. Check your internet connection.';
+          break;
+        case 'auth/invalid-credential':
+          errorMessage = 'Invalid credentials. Please try again.';
+          break;
+      }
+      showMessage({
+        message: errorMessage,
+        type: 'danger',
+      });
     }
   };
 
