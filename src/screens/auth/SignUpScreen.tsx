@@ -17,28 +17,31 @@ import { auth } from '../../config/firebase';
 import { showMessage } from 'react-native-flash-message';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../store/reducers/userSlice';
-
-const schema = yup
-  .object({
-    userName: yup
-      .string()
-      .required('User Name is required')
-      .min(3, 'User Name must be at least 3 characters')
-      .max(20, 'User Name must be less than 20 characters'),
-    email: yup
-      .string()
-      .required('Email is required')
-      .email('Please enter a valid email address'),
-    password: yup
-      .string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  })
-  .required();
-
-type FormData = yup.InferType<typeof schema>;
+import { useTranslation } from 'react-i18next';
 
 const SignUpScreen = () => {
+  const { t } = useTranslation();
+
+  const schema = yup
+    .object({
+      userName: yup
+        .string()
+        .required(t('validation.userNameRequired'))
+        .min(3, t('validation.userNameMinLength'))
+        .max(20, t('validation.userNameMaxLength')),
+      email: yup
+        .string()
+        .required(t('validation.emailRequired'))
+        .email(t('validation.emailInvalid')),
+      password: yup
+        .string()
+        .required(t('validation.passwordRequired'))
+        .min(6, t('validation.passwordMinLength')),
+    })
+    .required();
+
+  type FormData = yup.InferType<typeof schema>;
+
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -60,24 +63,22 @@ const SignUpScreen = () => {
       };
       dispatch(setUserData(userDataObj));
     } catch (error: any) {
-      let errorMessage =
-        'An error occurred while signing up. Please try again.';
+      let errorMessage = t('errors.signUpError');
       switch (error.code) {
         case 'auth/email-already-in-use':
-          errorMessage = 'Email already in use. Please use a different email.';
+          errorMessage = t('errors.emailAlreadyInUse');
           break;
         case 'auth/invalid-email':
-          errorMessage = 'Invalid email. Please enter a valid email address.';
+          errorMessage = t('errors.invalidEmail');
           break;
         case 'auth/weak-password':
-          errorMessage =
-            'Password is too weak. Please enter a stronger password.';
+          errorMessage = t('errors.weakPassword');
           break;
         case 'auth/network-request-failed':
-          errorMessage = 'Network error. Check your internet connection.';
+          errorMessage = t('errors.networkError');
           break;
         case 'auth/invalid-credential':
-          errorMessage = 'Invalid credentials. Please try again.';
+          errorMessage = t('errors.invalidCredential');
           break;
       }
       showMessage({
@@ -92,28 +93,28 @@ const SignUpScreen = () => {
       <Image source={IMAGES.appLogo} style={styles.logo} />
       <AppTextInputController
         name="userName"
-        placeholder="User Name"
+        placeholder={t('userName')}
         control={control}
       />
       <AppTextInputController
         name="email"
-        placeholder="Email"
+        placeholder={t('email')}
         control={control}
         keyboardType="email-address"
       />
       <AppTextInputController
         name="password"
-        placeholder="Password"
+        placeholder={t('password')}
         control={control}
         secureTextEntry
       />
-      <AppText style={styles.appName}>Smart E-Commerce</AppText>
+      <AppText style={styles.appName}>{t('appName')}</AppText>
       <AppButton
-        title="Create New Account"
+        title={t('createNewAccount')}
         onPress={handleSubmit(handleSignUp)}
       />
       <AppButton
-        title="Go To Sign In"
+        title={t('goToSignIn')}
         style={styles.signInButton}
         onPress={() => navigation.navigate('SignInScreen')}
         textColor={AppColors.primary}

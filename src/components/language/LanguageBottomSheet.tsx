@@ -6,17 +6,22 @@ import AppButton from '../buttons/AppButton';
 import { s } from 'react-native-size-matters';
 import { AppColors } from '../../styles/colors';
 import RadioWithTitle from '../inputs/RadioWithTitle';
+import { useTranslation } from 'react-i18next';
 
 const LanguageBottomSheet = () => {
+  const { t } = useTranslation();
+
   return (
     <ActionSheet id="LANG_SHEET">
       <View style={styles.container}>
         <AppText variant="bold" style={styles.title}>
-          Select Language
+          {t('selectLanguage')}
         </AppText>
-        <RadioWithTitle title="English" selected={true} />
-        <RadioWithTitle title="Arabic" selected={false} />
-        <AppButton title="Confirm" onPress={() => {}} />
+        <RadioWithTitle title={t('english')} selected={true} />
+        <RadioWithTitle title={t('arabic')} selected={false} />
+        <RadioWithTitle title={t('deutsch')} selected={false} />
+        <RadioWithTitle title={t('french')} selected={false} />
+        <AppButton title={t('confirm')} onPress={() => {}} />
       </View>
     </ActionSheet>
   );

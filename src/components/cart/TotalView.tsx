@@ -4,6 +4,7 @@ import { s, vs } from 'react-native-size-matters';
 import AppText from '../texts/AppText';
 import { AppColors } from '../../styles/colors';
 import { SHIPPING_FEE, TAXES } from '../../constants/constants';
+import { useTranslation } from 'react-i18next';
 
 interface ITotalView {
   itemsPrice: number;
@@ -11,23 +12,25 @@ interface ITotalView {
 }
 
 const TotalView: FC<ITotalView> = ({ itemsPrice, orderTotal }) => {
+  const { t } = useTranslation();
+
   return (
     <View>
       <View style={styles.row}>
-        <AppText style={styles.textTitle}>Items Price:</AppText>
+        <AppText style={styles.textTitle}>{t('itemsPrice')}</AppText>
         <AppText style={styles.textPrice}>${itemsPrice}</AppText>
       </View>
       <View style={styles.row}>
-        <AppText style={styles.textTitle}>Shipping Fee:</AppText>
+        <AppText style={styles.textTitle}>{t('shippingFee')}</AppText>
         <AppText style={styles.textPrice}>${SHIPPING_FEE}</AppText>
       </View>
       <View style={styles.row}>
-        <AppText style={styles.textTitle}>Tax:</AppText>
+        <AppText style={styles.textTitle}>{t('tax')}</AppText>
         <AppText style={styles.textPrice}>${TAXES}</AppText>
       </View>
       <View style={styles.separator} />
       <View style={styles.row}>
-        <AppText style={styles.textTitle}>Order Total:</AppText>
+        <AppText style={styles.textTitle}>{t('orderTotal')}</AppText>
         <AppText style={styles.textPrice}>${orderTotal}</AppText>
       </View>
     </View>

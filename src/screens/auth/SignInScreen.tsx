@@ -17,23 +17,26 @@ import { auth } from '../../config/firebase';
 import { showMessage } from 'react-native-flash-message';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../store/reducers/userSlice';
-
-const schema = yup
-  .object({
-    email: yup
-      .string()
-      .required('Email is required')
-      .email('Please enter a valid email address'),
-    password: yup
-      .string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  })
-  .required();
-
-type FormData = yup.InferType<typeof schema>;
+import { useTranslation } from 'react-i18next';
 
 const SignInScreen = () => {
+  const { t } = useTranslation();
+
+  const schema = yup
+    .object({
+      email: yup
+        .string()
+        .required(t('validation.emailRequired'))
+        .email(t('validation.emailInvalid')),
+      password: yup
+        .string()
+        .required(t('validation.passwordRequired'))
+        .min(6, t('validation.passwordMinLength')),
+    })
+    .required();
+
+  type FormData = yup.InferType<typeof schema>;
+
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -64,36 +67,35 @@ const SignInScreen = () => {
 
       dispatch(setUserData(userDataObj));
     } catch (error: any) {
-      let errorMessage =
-        'An error occurred while signing in. Please try again.';
+      let errorMessage = t('errors.signInError');
 
       switch (error.code) {
         case 'auth/invalid-email':
-          errorMessage = 'Invalid email address.';
+          errorMessage = t('errors.invalidEmail');
           break;
         case 'auth/missing-email':
-          errorMessage = 'Please enter your email.';
+          errorMessage = t('errors.missingEmail');
           break;
         case 'auth/missing-password':
-          errorMessage = 'Please enter your password.';
+          errorMessage = t('errors.missingPassword');
           break;
         case 'auth/wrong-password':
-          errorMessage = 'Incorrect password.';
+          errorMessage = t('errors.wrongPassword');
           break;
         case 'auth/user-not-found':
-          errorMessage = 'No user found with this email.';
+          errorMessage = t('errors.userNotFound');
           break;
         case 'auth/user-disabled':
-          errorMessage = 'This account has been disabled.';
+          errorMessage = t('errors.userDisabled');
           break;
         case 'auth/too-many-requests':
-          errorMessage = 'Too many attempts. Please try again later.';
+          errorMessage = t('errors.tooManyRequests');
           break;
         case 'auth/network-request-failed':
-          errorMessage = 'Network error. Check your internet connection.';
+          errorMessage = t('errors.networkError');
           break;
         case 'auth/invalid-credential':
-          errorMessage = 'Invalid credentials. Please try again.';
+          errorMessage = t('errors.invalidCredential');
           break;
       }
       showMessage({
@@ -108,20 +110,20 @@ const SignInScreen = () => {
       <Image source={IMAGES.appLogo} style={styles.logo} />
       <AppTextInputController
         name="email"
-        placeholder="Email"
+        placeholder={t('email')}
         control={control}
         keyboardType="email-address"
       />
       <AppTextInputController
         name="password"
-        placeholder="Password"
+        placeholder={t('password')}
         control={control}
         secureTextEntry
       />
-      <AppText style={styles.appName}>Smart E-Commerce</AppText>
-      <AppButton title="login" onPress={handleSubmit(handleSignIn)} />
+      <AppText style={styles.appName}>{t('appName')}</AppText>
+      <AppButton title={t('login')} onPress={handleSubmit(handleSignIn)} />
       <AppButton
-        title="Sign Up"
+        title={t('signUp')}
         style={styles.registerButton}
         onPress={() => navigation.navigate('SignUpScreen')}
         textColor={AppColors.primary}

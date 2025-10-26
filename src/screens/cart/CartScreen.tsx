@@ -17,8 +17,10 @@ import {
   removeProductFromCart,
   addItemToCart,
 } from '../../store/reducers/cartSlice';
+import { useTranslation } from 'react-i18next';
 
 const CartScreen = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<any>>();
   const { items } = useSelector((state: RootState) => state.cartSlice);
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ const CartScreen = () => {
             orderTotal={orderTotal}
           />
           <AppButton
-            title="Continue"
+            title={t('continue')}
             onPress={() => navigation.navigate('CheckOutScreen')}
           />
         </View>

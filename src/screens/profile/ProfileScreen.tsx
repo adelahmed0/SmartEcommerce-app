@@ -11,26 +11,28 @@ import { AppColors } from '../../styles/colors';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { SheetManager } from 'react-native-actions-sheet';
 import LanguageBottomSheet from '../../components/language/LanguageBottomSheet';
+import { useTranslation } from 'react-i18next';
 
 const ProfileScreen = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<any>>();
   return (
     <AppSafeView>
       <HomeHeader />
       <AppText variant="bold" style={styles.helloText}>
-        Hello, User
+        {t('hello')}, {t('user')}
       </AppText>
       <View style={{ paddingHorizontal: sharedPaddingHorizontal }}>
         <ProfileSectionButton
           onPress={() => navigation.navigate('MyOrdersScreen')}
-          title="My Orders"
+          title={t('myOrders')}
         />
         <ProfileSectionButton
           onPress={() => SheetManager.show('LANG_SHEET')}
-          title="Language"
+          title={t('language')}
         />
         <LanguageBottomSheet />
-        <ProfileSectionButton onPress={() => {}} title="Logout" />
+        <ProfileSectionButton onPress={() => {}} title={t('logout')} />
       </View>
     </AppSafeView>
   );

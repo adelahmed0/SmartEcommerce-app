@@ -20,28 +20,31 @@ import { db } from '../../config/firebase';
 import { showMessage } from 'react-native-flash-message';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { emptyCart } from '../../store/reducers/cartSlice';
-
-const schema = yup
-  .object({
-    fullName: yup
-      .string()
-      .required('Full Name is required')
-      .min(3, 'Full Name must be at least 3 characters'),
-    phoneNumber: yup
-      .string()
-      .required('Phone Number is required')
-      .matches(/^[0-9]+$/, 'Phone Number must be numbers only')
-      .min(10, 'Phone Number must be at least 10 digits'),
-    detailedAddress: yup
-      .string()
-      .required('Detailed Address is required')
-      .min(15, 'Detailed Address must be at least 15 characters'),
-  })
-  .required();
-
-type FormData = yup.InferType<typeof schema>;
+import { useTranslation } from 'react-i18next';
 
 const CheckOutScreen = () => {
+  const { t } = useTranslation();
+
+  const schema = yup
+    .object({
+      fullName: yup
+        .string()
+        .required(t('validation.fullNameRequired'))
+        .min(3, t('validation.fullNameMinLength')),
+      phoneNumber: yup
+        .string()
+        .required(t('validation.phoneNumberRequired'))
+        .matches(/^[0-9]+$/, t('validation.phoneNumberInvalid'))
+        .min(10, t('validation.phoneNumberMinLength')),
+      detailedAddress: yup
+        .string()
+        .required(t('validation.detailedAddressRequired'))
+        .min(15, t('validation.detailedAddressMinLength')),
+    })
+    .required();
+
+  type FormData = yup.InferType<typeof schema>;
+
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -73,8 +76,8 @@ const CheckOutScreen = () => {
       await addDoc(orderRef, orderBody);
 
       showMessage({
-        message: 'Order Saved',
-        description: 'Order has been saved successfully',
+        message: t('orderSaved'),
+        description: t('orderSavedSuccess'),
         type: 'success',
       });
 
@@ -83,8 +86,8 @@ const CheckOutScreen = () => {
     } catch (error) {
       console.log('error', error);
       showMessage({
-        message: 'Error',
-        description: 'Something went wrong',
+        message: t('error'),
+        description: t('somethingWentWrong'),
         type: 'danger',
       });
     }
@@ -96,23 +99,23 @@ const CheckOutScreen = () => {
         <View style={styles.inputContainer}>
           <AppTextInputController
             name="fullName"
-            placeholder="Full Name"
+            placeholder={t('fullName')}
             control={control}
           />
           <AppTextInputController
             name="phoneNumber"
-            placeholder="Phone Number"
+            placeholder={t('phoneNumber')}
             control={control}
           />
           <AppTextInputController
             name="detailedAddress"
-            placeholder="Detailed Address"
+            placeholder={t('detailedAddress')}
             control={control}
           />
         </View>
       </View>
       <View style={styles.bottomButtonContainer}>
-        <AppButton title="Confirm" onPress={handleSubmit(saveOrder)} />
+        <AppButton title={t('confirm')} onPress={handleSubmit(saveOrder)} />
       </View>
     </AppSafeView>
   );
