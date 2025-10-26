@@ -1,8 +1,9 @@
 import { FlatList, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { sharedPaddingHorizontal } from '../../styles/sharedStyles';
 import OrderItem from '../../components/cart/OrderItem';
 import AppSafeView from '../../components/views/AppSafeView';
+import { fetchUserOrders } from '../../config/dataServices';
 
 const MyOrdersScreen = () => {
   // Dummy data for rendering the component
@@ -27,16 +28,27 @@ const MyOrdersScreen = () => {
     },
   ];
 
+  const [orders, setOrders] = useState<any[]>([]);
+
+  const getOrders = async () => {
+    const orders = await fetchUserOrders();
+    setOrders(orders);
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
   return (
     <AppSafeView>
       <FlatList
         contentContainerStyle={{ paddingHorizontal: sharedPaddingHorizontal }}
-        data={orderData}
+        data={orders}
         keyExtractor={(item, index) => item?.id.toString()}
         renderItem={({ item }) => (
           <OrderItem
-            date={item.date}
-            totalAmount={item.totalAmount}
+            date={item.createdAt.toDate().toLocaleDateString()}
+            totalAmount={item.totalProductsPriceSum}
             totalPrice={item.totalPrice}
             style={{ marginBottom: 10 }}
           />

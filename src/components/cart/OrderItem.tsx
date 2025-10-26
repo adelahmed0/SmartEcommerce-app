@@ -1,9 +1,9 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { AppColors } from "../../styles/colors";
-import AppText from "../texts/AppText";
-import { commonStyles } from "../../styles/sharedStyles";
-import { s } from "react-native-size-matters";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { AppColors } from '../../styles/colors';
+import AppText from '../texts/AppText';
+import { commonStyles } from '../../styles/sharedStyles';
+import { s } from 'react-native-size-matters';
 
 interface OrderItemProps {
   date: string;
@@ -24,14 +24,13 @@ const OrderItem: React.FC<OrderItemProps> = ({
       <View style={styles.divider} />
       <View style={styles.summaryContainer}>
         <View>
-          <AppText>Total Price: {totalPrice}</AppText>
+          <AppText>Total Price: {totalPrice} $</AppText>
           <AppText>Date: {date}</AppText>
         </View>
         <View style={styles.amountContainer}>
           <AppText style={styles.totalAmount}>
             {Math.abs(totalAmount).toFixed(2)} $
           </AppText>
-          <AppText style={styles.date}>{date}</AppText>
         </View>
       </View>
     </View>
@@ -48,24 +47,24 @@ const styles = StyleSheet.create({
     padding: s(15),
   },
   title: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     fontSize: 17,
     marginBottom: 5,
     color: AppColors.primary,
   },
   divider: {
     height: 1,
-    width: "100%",
+    width: '100%',
     backgroundColor: AppColors.primary,
   },
   summaryContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: 10,
   },
   amountContainer: {
-    flexDirection: "column",
-    alignItems: "flex-end",
+    flexDirection: 'column',
+    alignItems: 'flex-end',
   },
   totalAmount: {
     color: AppColors.primary,
