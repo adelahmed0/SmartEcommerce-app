@@ -55,7 +55,10 @@ const SignUpScreen = () => {
       );
       console.log('Sign Up Success:', userCredential);
       navigation.navigate('MainAppBottomTabs');
-      dispatch(setUserData(userCredential.user));
+      const userDataObj = {
+        uid: userCredential.user.uid,
+      };
+      dispatch(setUserData(userDataObj));
     } catch (error: any) {
       let errorMessage =
         'An error occurred while signing up. Please try again.';

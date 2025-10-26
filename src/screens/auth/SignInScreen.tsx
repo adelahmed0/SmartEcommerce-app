@@ -53,7 +53,12 @@ const SignInScreen = () => {
 
       console.log(JSON.stringify(userCredential, null, 3));
       navigation.navigate('MainAppBottomTabs');
-      dispatch(setUserData(userCredential.user));
+
+      const userDataObj = {
+        uid: userCredential.user.uid,
+      };
+
+      dispatch(setUserData(userDataObj));
     } catch (error: any) {
       let errorMessage =
         'An error occurred while signing in. Please try again.';

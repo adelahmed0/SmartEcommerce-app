@@ -67,7 +67,11 @@ const CheckOutScreen = () => {
         doc(db, 'users', (userData as { uid: string }).uid),
         'orders',
       );
-      const newOrderRef = await addDoc(userOrdersRef, orderBody);
+      await addDoc(userOrdersRef, orderBody);
+
+      const orderRef = collection(db, 'orders');
+      await addDoc(orderRef, orderBody);
+
       showMessage({
         message: 'Order Saved',
         description: 'Order has been saved successfully',
