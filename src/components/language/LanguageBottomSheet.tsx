@@ -5,6 +5,7 @@ import AppText from '../texts/AppText';
 import AppButton from '../buttons/AppButton';
 import { s } from 'react-native-size-matters';
 import { AppColors } from '../../styles/colors';
+import RadioWithTitle from '../inputs/RadioWithTitle';
 
 const LanguageBottomSheet = () => {
   return (
@@ -13,6 +14,8 @@ const LanguageBottomSheet = () => {
         <AppText variant="bold" style={styles.title}>
           Select Language
         </AppText>
+        <RadioWithTitle title="English" selected={true} />
+        <RadioWithTitle title="Arabic" selected={false} />
         <AppButton title="Confirm" onPress={() => {}} />
       </View>
     </ActionSheet>
