@@ -15,6 +15,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { showMessage } from 'react-native-flash-message';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../store/reducers/userSlice';
 
 const schema = yup
   .object({
@@ -42,6 +44,7 @@ const SignUpScreen = () => {
   });
 
   const navigation = useNavigation<NavigationProp<any>>();
+  const dispatch = useDispatch();
 
   const handleSignUp = async (formData: FormData) => {
     try {
@@ -52,7 +55,7 @@ const SignUpScreen = () => {
       );
       console.log('Sign Up Success:', userCredential);
       navigation.navigate('MainAppBottomTabs');
-      return userCredential.user;
+      dispatch(setUserData(userCredential.user));
     } catch (error: any) {
       let errorMessage =
         'An error occurred while signing up. Please try again.';

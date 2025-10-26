@@ -13,6 +13,8 @@ import { IS_IOS } from '../../constants/constants';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const schema = yup
   .object({
@@ -38,6 +40,8 @@ const CheckOutScreen = () => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
+  const { userData } = useSelector((state: RootState) => state.userSlice);
+  console.log('userData', userData);
 
   const saveOrder = (formData: FormData) => {
     Alert.alert('Order Saved', JSON.stringify(formData));
