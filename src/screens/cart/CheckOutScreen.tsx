@@ -9,12 +9,17 @@ import { s, vs } from 'react-native-size-matters';
 import { AppColors } from '../../styles/colors';
 import AppTextInputController from '../../components/inputs/AppTextInputController';
 import AppButton from '../../components/buttons/AppButton';
-import { IS_IOS } from '../../constants/constants';
+import { IS_IOS, SHIPPING_FEE, TAXES } from '../../constants/constants';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { addDoc, collection, doc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
+import { showMessage } from 'react-native-flash-message';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { emptyCart } from '../../store/reducers/cartSlice';
 
 const schema = yup
   .object({
@@ -40,12 +45,45 @@ const CheckOutScreen = () => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
-  const { userData } = useSelector((state: RootState) => state.userSlice);
-  console.log('userData', userData);
+  const navigation = useNavigation<NavigationProp<any>>();
+  const dispatch = useDispatch();
 
-  const saveOrder = (formData: FormData) => {
-    Alert.alert('Order Saved', JSON.stringify(formData));
-    console.log('saveOrder', formData);
+  const { userData } = useSelector((state: RootState) => state.userSlice);
+  const { items } = useSelector((state: RootState) => state.cartSlice);
+  const totalProductsPriceSum = items.reduce((acc, item) => acc + item.sum, 0);
+  const totalPrice = totalProductsPriceSum + TAXES + SHIPPING_FEE;
+
+  const saveOrder = async (formData: FormData) => {
+    try {
+      const orderBody = {
+        ...formData,
+        items,
+        totalProductsPriceSum,
+        createdAt: new Date(),
+        totalPrice,
+      };
+
+      const userOrdersRef = collection(
+        doc(db, 'users', (userData as { uid: string }).uid),
+        'orders',
+      );
+      const newOrderRef = await addDoc(userOrdersRef, orderBody);
+      showMessage({
+        message: 'Order Saved',
+        description: 'Order has been saved successfully',
+        type: 'success',
+      });
+
+      dispatch(emptyCart());
+      navigation.goBack();
+    } catch (error) {
+      console.log('error', error);
+      showMessage({
+        message: 'Error',
+        description: 'Something went wrong',
+        type: 'danger',
+      });
+    }
   };
 
   return (
