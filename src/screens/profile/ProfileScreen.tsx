@@ -9,6 +9,8 @@ import { s, vs } from 'react-native-size-matters';
 import { AppFonts } from '../../styles/fonts';
 import { AppColors } from '../../styles/colors';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { SheetManager } from 'react-native-actions-sheet';
+import LanguageBottomSheet from '../../components/language/LanguageBottomSheet';
 
 const ProfileScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -23,7 +25,11 @@ const ProfileScreen = () => {
           onPress={() => navigation.navigate('MyOrdersScreen')}
           title="My Orders"
         />
-        <ProfileSectionButton onPress={() => {}} title="Language" />
+        <ProfileSectionButton
+          onPress={() => SheetManager.show('LANG_SHEET')}
+          title="Language"
+        />
+        <LanguageBottomSheet />
         <ProfileSectionButton onPress={() => {}} title="Logout" />
       </View>
     </AppSafeView>

@@ -36,6 +36,10 @@ type FormData = yup.InferType<typeof schema>;
 const SignInScreen = () => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: 'test@app.com',
+      password: '12345678',
+    },
   });
 
   const navigation = useNavigation<NavigationProp<any>>();
