@@ -12,6 +12,9 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase';
+import { showMessage } from 'react-native-flash-message';
 
 const schema = yup
   .object({
@@ -27,11 +30,7 @@ const schema = yup
     password: yup
       .string()
       .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-        'Password must contain at least one uppercase letter, one lowercase letter, and one number',
-      ),
+      .min(6, 'Password must be at least 6 characters'),
   })
   .required();
 
@@ -44,9 +43,42 @@ const SignUpScreen = () => {
 
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const handleSignUp = (formData: FormData) => {
-    console.log('Sign Up Data:', formData);
-    navigation.navigate('SignInScreen');
+  const handleSignUp = async (formData: FormData) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password,
+      );
+      console.log('Sign Up Success:', userCredential);
+      navigation.navigate('MainAppBottomTabs');
+      return userCredential.user;
+    } catch (error: any) {
+      let errorMessage =
+        'An error occurred while signing up. Please try again.';
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          errorMessage = 'Email already in use. Please use a different email.';
+          break;
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email. Please enter a valid email address.';
+          break;
+        case 'auth/weak-password':
+          errorMessage =
+            'Password is too weak. Please enter a stronger password.';
+          break;
+        case 'auth/network-request-failed':
+          errorMessage = 'Network error. Check your internet connection.';
+          break;
+        case 'auth/invalid-credential':
+          errorMessage = 'Invalid credentials. Please try again.';
+          break;
+      }
+      showMessage({
+        message: errorMessage,
+        type: 'danger',
+      });
+    }
   };
 
   return (
