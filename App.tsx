@@ -7,6 +7,8 @@ import { AppColors } from './src/styles/colors';
 import { store } from './src/store/store';
 import { Provider } from 'react-redux';
 import { vs } from 'react-native-size-matters';
+import i18n from './src/localization/i18n';
+import { I18nextProvider } from 'react-i18next';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,12 +23,14 @@ export default function App() {
   return (
     <>
       <Provider store={store}>
-        <NavigationContainer>
-          <FlashMessage
-            position={Platform.OS === 'ios' ? 'top' : { top: vs(40) }}
-          />
-          <MainAppStack />
-        </NavigationContainer>
+        <I18nextProvider i18n={i18n}>
+          <NavigationContainer>
+            <FlashMessage
+              position={Platform.OS === 'ios' ? 'top' : { top: vs(40) }}
+            />
+            <MainAppStack />
+          </NavigationContainer>
+        </I18nextProvider>
       </Provider>
     </>
   );
