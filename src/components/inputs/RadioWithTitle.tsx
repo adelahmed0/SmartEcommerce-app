@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: vs(5),
+    paddingVertical: vs(10),
   },
   circle: {
     width: s(20),
