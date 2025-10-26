@@ -12,6 +12,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 const schema = yup
   .object({
@@ -35,9 +37,20 @@ const SignInScreen = () => {
 
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const handleSignIn = (formData: FormData) => {
+  const handleSignIn = async (formData: FormData) => {
     console.log('Sign In Data:', formData);
-    navigation.navigate('MainAppBottomTabs');
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password,
+      );
+      navigation.navigate('MainAppBottomTabs');
+      console.log('Sign In Success:', userCredential);
+    } catch (error) {
+      console.log('Sign In Error:', error);
+    }
   };
 
   return (
