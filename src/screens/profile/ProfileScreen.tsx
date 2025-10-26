@@ -12,10 +12,24 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { SheetManager } from 'react-native-actions-sheet';
 import LanguageBottomSheet from '../../components/language/LanguageBottomSheet';
 import { useTranslation } from 'react-i18next';
+import { setUserData } from '../../store/reducers/userSlice';
+import { auth } from '../../config/firebase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProfileScreen = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<any>>();
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      await AsyncStorage.removeItem('userData');
+      navigation.navigate('AuthStack');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <AppSafeView>
       <HomeHeader />
@@ -32,7 +46,7 @@ const ProfileScreen = () => {
           title={t('language')}
         />
         <LanguageBottomSheet />
-        <ProfileSectionButton onPress={() => {}} title={t('logout')} />
+        <ProfileSectionButton onPress={handleLogout} title={t('logout')} />
       </View>
     </AppSafeView>
   );

@@ -5,7 +5,7 @@ import CheckOutScreen from '../screens/cart/CheckOutScreen';
 import MyOrdersScreen from '../screens/profile/MyOrdersScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserData } from '../store/reducers/userSlice';
+import { setUserData, setIsLoading } from '../store/reducers/userSlice';
 import { useEffect } from 'react';
 import { RootState } from '../store/store';
 
@@ -14,22 +14,31 @@ const Stack = createStackNavigator();
 export default function MainAppStack() {
   const dispatch = useDispatch();
 
-  const { userData } = useSelector((state: RootState) => state.userSlice);
+  const { userData, isLoading } = useSelector(
+    (state: RootState) => state.userSlice,
+  );
 
   const isUserSignedIn = async () => {
     try {
       const storedUserData = await AsyncStorage.getItem('userData');
       if (storedUserData) {
         dispatch(setUserData(JSON.parse(storedUserData)));
+      } else {
+        dispatch(setIsLoading(false));
       }
     } catch (error) {
       console.error(error);
+      dispatch(setIsLoading(false));
     }
   };
 
   useEffect(() => {
     isUserSignedIn();
   }, []);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <Stack.Navigator
