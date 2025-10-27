@@ -17,7 +17,7 @@ export const fetchUserOrders = async () => {
   try {
     const userIdFromRedux = (
       store.getState().userSlice.userData as { uid: string }
-    ).uid;
+    )?.uid;
     const userIdFromFirebase = auth.currentUser?.uid;
 
     if (!userIdFromFirebase) {
