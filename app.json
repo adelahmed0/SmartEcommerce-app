@@ -21,7 +21,8 @@
         "backgroundColor": "#00BCD4"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.adelahmed0.SmartEcommerce"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,9 +34,15 @@
         {
           "backgroundColor": "#00BCD4",
           "image": "./assets/appsplash.png",
-          "imageWidth": 200
+          "imageWidth": 400
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "737f07f5-2bd3-46eb-8979-6b87f969707a"
+      }
+    },
+    "owner": "adelahmed0"
   }
 }

@@ -40,8 +40,8 @@ const SignInScreen = () => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: 'test@app.com',
-      password: '12345678',
+      email: __DEV__ ? 'test@app.com' : '',
+      password: __DEV__ ? '12345678' : '',
     },
   });
 
