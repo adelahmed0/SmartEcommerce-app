@@ -22,6 +22,9 @@ export default function MainAppBottomTabs() {
           fontSize: s(12),
           marginTop: vs(4),
         },
+        tabBarStyle: {
+          zIndex: 1000,
+        },
       }}
     >
       <Tab.Screen

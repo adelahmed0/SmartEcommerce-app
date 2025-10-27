@@ -36,6 +36,7 @@ const AppTextInput: FC<AppTextInputProps> = ({
       placeholder={placeholder}
       secureTextEntry={secureTextEntry}
       keyboardType={keyboardType}
+      placeholderTextColor={AppColors.medGray}
       {...props}
     />
   );

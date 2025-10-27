@@ -2,7 +2,7 @@ import FlashMessage from 'react-native-flash-message';
 import { NavigationContainer } from '@react-navigation/native';
 import MainAppStack from './src/navigation/MainAppStack';
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, Platform, View } from 'react-native';
+import { ActivityIndicator, Platform, StatusBar, View } from 'react-native';
 import { AppColors } from './src/styles/colors';
 import { persistor, store } from './src/store/store';
 import { Provider } from 'react-redux';
@@ -40,6 +40,11 @@ export default function App() {
 
   return (
     <>
+      <StatusBar
+        translucent={true}
+        barStyle="dark-content"
+        backgroundColor="transparent"
+      />
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <I18nextProvider i18n={i18n}>
