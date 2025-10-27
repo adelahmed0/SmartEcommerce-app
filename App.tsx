@@ -10,6 +10,12 @@ import { vs } from 'react-native-size-matters';
 import i18n from './src/localization/i18n';
 import { I18nextProvider } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
 
 export default function App() {
   const [fontsLoaded] = useFonts({
