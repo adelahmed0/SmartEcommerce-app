@@ -29,9 +29,28 @@ const TotalView: FC<ITotalView> = ({ itemsPrice, orderTotal }) => {
         <AppText style={styles.textPrice}>${TAXES}</AppText>
       </View>
       <View style={styles.separator} />
-      <View style={styles.row}>
-        <AppText style={styles.textTitle}>{t('orderTotal')}</AppText>
-        <AppText style={styles.textPrice}>${orderTotal}</AppText>
+      <View
+        style={[
+          styles.row,
+          {
+            backgroundColor: AppColors.lightGray,
+            padding: s(12),
+            borderRadius: s(10),
+            marginTop: vs(8),
+          },
+        ]}
+      >
+        <AppText
+          style={[
+            styles.textTitle,
+            { fontSize: s(18), color: AppColors.black },
+          ]}
+        >
+          {t('orderTotal')}
+        </AppText>
+        <AppText style={[styles.textPrice, { fontSize: s(20) }]}>
+          ${orderTotal}
+        </AppText>
       </View>
     </View>
   );
@@ -43,20 +62,23 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: vs(10),
+    marginBottom: vs(12),
+    paddingVertical: vs(4),
   },
   textTitle: {
     fontSize: s(16),
     flex: 1,
+    color: AppColors.medGray,
   },
   textPrice: {
-    fontSize: s(16),
-    color: AppColors.primary,
+    fontSize: s(18),
+    color: AppColors.secondary,
+    fontWeight: 'bold',
   },
   separator: {
-    height: 1,
+    height: 1.5,
     width: '100%',
     backgroundColor: AppColors.borderColor,
-    marginVertical: vs(5),
+    marginVertical: vs(8),
   },
 });

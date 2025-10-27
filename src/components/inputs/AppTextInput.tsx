@@ -45,14 +45,22 @@ export default AppTextInput;
 
 const styles = StyleSheet.create({
   input: {
-    height: vs(40),
-    borderRadius: s(25),
-    borderWidth: 1,
+    height: vs(50),
+    borderRadius: s(12),
+    borderWidth: 1.5,
     borderColor: AppColors.borderColor,
-    paddingHorizontal: s(15),
+    paddingHorizontal: s(18),
     fontSize: s(16),
     backgroundColor: AppColors.white,
     width: '100%',
-    marginBottom: vs(10),
+    marginBottom: vs(15),
+    shadowColor: AppColors.black,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
 });

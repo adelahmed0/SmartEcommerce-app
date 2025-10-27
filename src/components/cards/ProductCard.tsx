@@ -22,8 +22,12 @@ const ProductCard: FC<IProductCard> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.addToCartButton} onPress={onAddToCart}>
-        <Ionicons name="cart" color={AppColors.white} size={s(15)} />
+      <TouchableOpacity
+        style={styles.addToCartButton}
+        onPress={onAddToCart}
+        activeOpacity={0.7}
+      >
+        <Ionicons name="cart" color={AppColors.white} size={s(18)} />
       </TouchableOpacity>
       <View style={styles.imageContainer}>
         <Image
@@ -34,8 +38,10 @@ const ProductCard: FC<IProductCard> = ({
         />
       </View>
       <View style={styles.detailsContainer}>
-        <AppText style={styles.titleText}>{title}</AppText>
-        <AppText style={styles.priceText}>{price} $</AppText>
+        <AppText style={styles.titleText} numberOfLines={2}>
+          {title}
+        </AppText>
+        <AppText style={styles.priceText}>${price}</AppText>
       </View>
     </View>
   );
@@ -46,17 +52,27 @@ export default ProductCard;
 const styles = StyleSheet.create({
   container: {
     width: s(160),
-    height: vs(190),
+    height: vs(210),
     backgroundColor: AppColors.white,
-    borderRadius: s(10),
-    ...commonStyles.shadow,
+    borderRadius: s(16),
+    borderWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 8,
+    overflow: 'hidden',
   },
   imageContainer: {
     overflow: 'hidden',
-    borderTopLeftRadius: s(10),
-    borderTopRightRadius: s(10),
-    height: vs(130),
+    borderTopLeftRadius: s(16),
+    borderTopRightRadius: s(16),
+    height: vs(140),
     width: '100%',
+    backgroundColor: AppColors.white,
   },
   image: {
     width: '100%',
@@ -65,31 +81,40 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flex: 1,
-    paddingTop: s(8),
+    paddingTop: vs(10),
     paddingBottom: vs(15),
-    paddingHorizontal: s(10),
+    paddingHorizontal: s(12),
   },
   titleText: {
     fontSize: s(14),
     fontFamily: AppFonts.medium,
-    color: AppColors.primary,
+    color: AppColors.black,
+    marginBottom: s(4),
   },
   priceText: {
-    fontSize: s(14),
+    fontSize: s(16),
     fontFamily: AppFonts.bold,
     color: AppColors.primary,
-    marginTop: s(7),
+    marginTop: s(4),
   },
   addToCartButton: {
     position: 'absolute',
-    width: s(28),
-    height: s(28),
-    left: 5,
-    top: 5,
-    backgroundColor: AppColors.primary,
-    borderRadius: s(14),
+    width: s(36),
+    height: s(36),
+    right: 8,
+    top: 8,
+    backgroundColor: AppColors.secondary,
+    borderRadius: s(18),
     zIndex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: AppColors.secondary,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });

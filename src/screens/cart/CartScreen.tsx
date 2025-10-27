@@ -31,7 +31,7 @@ const CartScreen = () => {
     <AppSafeView>
       <HomeHeader />
       {items.length > 0 ? (
-        <View style={{ paddingHorizontal: sharedPaddingHorizontal, flex: 1 }}>
+        <View style={styles.contentContainer}>
           <FlatList
             data={items}
             renderItem={({ item }) => (
@@ -69,4 +69,9 @@ const CartScreen = () => {
 
 export default CartScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  contentContainer: {
+    paddingHorizontal: sharedPaddingHorizontal,
+    flex: 1,
+  },
+});

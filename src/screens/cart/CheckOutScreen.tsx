@@ -138,7 +138,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     borderTopWidth: 1,
-    borderTopColor: AppColors.lightGray,
-    paddingTop: vs(10),
+    borderTopColor: AppColors.borderColor,
+    paddingTop: vs(15),
+    paddingBottom: vs(15),
+    backgroundColor: AppColors.white,
   },
 });

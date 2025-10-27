@@ -7,11 +7,11 @@ export const sharedPaddingHorizontal = s(12);
 export const commonStyles = StyleSheet.create({
   shadow: {
     // IOS
-    shadowColor: AppColors.black,
+    shadowColor: AppColors.primary,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
     // Android
-    elevation: 5,
+    elevation: 6,
   },
 });

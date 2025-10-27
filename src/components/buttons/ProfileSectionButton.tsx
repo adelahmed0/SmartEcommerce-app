@@ -36,15 +36,17 @@ export default ProfileSectionButton;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderBottomColor: AppColors.lightGray,
-    paddingBottom: vs(10),
-    marginTop: vs(14),
+    borderBottomColor: AppColors.borderColor,
+    paddingBottom: vs(12),
+    marginTop: vs(12),
     flexDirection: 'row',
     borderBottomWidth: 1,
+    alignItems: 'center',
+    paddingVertical: vs(8),
   },
   textTitle: {
     fontSize: s(16),
-    color: AppColors.primary,
+    color: AppColors.black,
     fontFamily: AppFonts.medium,
   },
   textContainer: {

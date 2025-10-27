@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginBottom: vs(20),
-    opacity: 0.9,
+    opacity: 0.7,
   },
 });

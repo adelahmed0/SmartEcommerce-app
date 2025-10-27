@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     width: '100%',
-    backgroundColor: AppColors.primary,
+    backgroundColor: AppColors.borderColor,
+    marginVertical: s(10),
   },
   summaryContainer: {
     flexDirection: 'row',
@@ -74,9 +75,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   totalAmount: {
-    color: AppColors.primary,
+    color: AppColors.secondary,
+    fontSize: s(18),
+    fontFamily: 'Nunito-Bold',
   },
   date: {
-    color: AppColors.primary,
+    color: AppColors.medGray,
   },
 });

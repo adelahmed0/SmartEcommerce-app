@@ -39,10 +39,12 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         columnWrapperStyle={{
           justifyContent: 'space-between',
-          marginBottom: vs(10),
+          marginBottom: vs(15),
+          gap: s(10),
         }}
         contentContainerStyle={{
           paddingHorizontal: s(10),
+          paddingTop: vs(10),
         }}
       />
     </AppSafeView>

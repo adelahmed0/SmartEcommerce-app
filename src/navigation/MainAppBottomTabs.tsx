@@ -17,6 +17,7 @@ export default function MainAppBottomTabs() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: AppColors.primary,
+        tabBarInactiveTintColor: AppColors.medGray,
         tabBarLabelStyle: {
           fontSize: s(12),
           marginTop: vs(4),

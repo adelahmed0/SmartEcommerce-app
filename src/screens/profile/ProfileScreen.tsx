@@ -52,10 +52,12 @@ export default ProfileScreen;
 
 const styles = StyleSheet.create({
   helloText: {
-    fontSize: s(18),
-    color: AppColors.primary,
+    fontSize: s(22),
+    color: AppColors.black,
     fontFamily: AppFonts.bold,
-    marginTop: vs(10),
+    marginTop: vs(20),
+    marginBottom: vs(10),
     marginHorizontal: sharedPaddingHorizontal,
+    letterSpacing: 0.3,
   },
 });

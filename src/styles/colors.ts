@@ -1,14 +1,18 @@
 export const AppColors = {
-  primary: '#1E88E5',
-  secondary: '#FFC107',
+  // Primary and Secondary colors
+  primary: '#00BCD4', // Teal/Cyan - Main color
+  secondary: '#1E88E5', // Dark Blue - Secondary color
+
+  // Neutrals
   white: '#FFFFFF',
   black: '#121212',
-  lightGray: '#F5F5F5',
-  background: '#FAFAFA',
-  disabledGray: '#BDBDBD',
-  blueGray: '#90A4AE',
-  borderColor: '#ccc',
+  lightGray: '#E0E0E0',
   medGray: '#757575',
+  disabledGray: '#BDBDBD',
+  borderColor: '#E0E0E0',
+  background: '#F5F5F5',
+
+  // Status colors
   success: '#4CAF50',
-  error: '#E53935',
+  error: '#F44336',
 };

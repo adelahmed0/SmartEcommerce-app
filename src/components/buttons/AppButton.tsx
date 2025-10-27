@@ -64,13 +64,22 @@ export default AppButton;
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    height: vs(40),
+    height: vs(48),
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    borderRadius: s(25),
+    borderRadius: s(12),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   textTitle: {
     fontSize: s(16),
+    letterSpacing: 0.5,
   },
 });

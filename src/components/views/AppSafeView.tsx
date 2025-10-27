@@ -21,7 +21,7 @@ export default AppSafeView;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: AppColors.white,
+    backgroundColor: AppColors.background,
     paddingTop: IS_ANDROID ? vs(10) : 0,
   },
   container: {

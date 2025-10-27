@@ -134,13 +134,14 @@ const styles = StyleSheet.create({
     marginBottom: vs(30),
   },
   appName: {
-    fontSize: s(16),
+    fontSize: s(20),
     fontWeight: '700',
-    marginBottom: vs(15),
+    color: AppColors.primary,
+    marginBottom: vs(20),
   },
   signInButton: {
     backgroundColor: AppColors.white,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: AppColors.primary,
     marginTop: vs(15),
   },

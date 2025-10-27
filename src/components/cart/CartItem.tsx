@@ -40,11 +40,15 @@ const CartItem: FC<ICartItem> = ({
         <AppText style={styles.textPrice}>{price} $</AppText>
         <View style={styles.quantityContainer}>
           <Pressable onPress={onIncrementPress} style={styles.iconButton}>
-            <FontAwesome name="plus" size={s(10)} color={AppColors.primary} />
+            <FontAwesome name="plus" size={s(10)} color={AppColors.secondary} />
           </Pressable>
           <AppText style={styles.quantityText}>{quantity}</AppText>
           <Pressable onPress={onDecrementPress} style={styles.iconButton}>
-            <FontAwesome name="minus" size={s(10)} color={AppColors.primary} />
+            <FontAwesome
+              name="minus"
+              size={s(10)}
+              color={AppColors.secondary}
+            />
           </Pressable>
         </View>
       </View>
@@ -66,7 +70,12 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderBottomColor: AppColors.borderColor,
-    paddingBottom: vs(10),
+    paddingBottom: vs(15),
+    paddingTop: vs(5),
+    backgroundColor: AppColors.white,
+    marginVertical: vs(6),
+    borderRadius: s(10),
+    paddingHorizontal: s(5),
   },
   imageContainer: {
     flex: 1.5,
@@ -85,19 +94,20 @@ const styles = StyleSheet.create({
     width: s(80),
     height: s(80),
     resizeMode: 'cover',
-    borderRadius: s(5),
+    borderRadius: s(10),
+    backgroundColor: AppColors.lightGray,
   },
   textTitle: {
-    fontSize: s(14),
+    fontSize: s(15),
     fontFamily: AppFonts.medium,
-    color: AppColors.primary,
+    color: AppColors.black,
     marginTop: vs(5),
   },
   textPrice: {
-    fontSize: s(14),
+    fontSize: s(16),
     fontFamily: AppFonts.bold,
     color: AppColors.primary,
-    marginVertical: vs(5),
+    marginVertical: vs(8),
   },
   deleteText: {
     marginLeft: 7,
@@ -114,25 +124,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: s(5),
-    borderRadius: s(30),
-    borderWidth: s(1),
-    borderColor: AppColors.borderColor,
-    width: s(80),
-    paddingVertical: vs(5),
+    paddingHorizontal: s(8),
+    borderRadius: s(25),
+    borderWidth: s(1.5),
+    borderColor: AppColors.secondary,
+    width: s(90),
+    paddingVertical: vs(6),
+    backgroundColor: AppColors.lightGray,
   },
   iconButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppColors.lightGray,
+    backgroundColor: AppColors.white,
     padding: s(5),
-    width: s(20),
-    height: s(20),
-    borderRadius: s(10),
+    width: s(22),
+    height: s(22),
+    borderRadius: s(11),
+    borderWidth: 1,
+    borderColor: AppColors.borderColor,
   },
   quantityText: {
     flex: 1,
     textAlign: 'center',
-    color: AppColors.primary,
+    color: AppColors.secondary,
+    fontFamily: AppFonts.bold,
   },
 });
