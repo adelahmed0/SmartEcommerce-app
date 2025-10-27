@@ -13,29 +13,29 @@ const LANGUAGES = {
   fr: { translation: fr },
 };
 
-const LANGUAGE_DETECTOR = {
-  type: 'languageDetector',
-  async: true,
-  detect: async (callback: (lng: string) => void) => {
-    try {
-      const SavedLanguage = await AsyncStorage.getItem('LANGUAGE');
-      if (SavedLanguage) {
-        callback(SavedLanguage);
-      }
-    } catch (error) {
-      console.error('Error getting language from AsyncStorage:', error);
-      callback('ar');
-    }
-    callback('ar');
-  },
-  cacheUserLanguage: async (lng: string) => {
-    try {
-      await AsyncStorage.setItem('LANGUAGE', lng);
-    } catch (error) {
-      console.error('Error getting language from AsyncStorage:', error);
-    }
-  },
-};
+// const LANGUAGE_DETECTOR = {
+//   type: 'languageDetector',
+//   async: true,
+//   detect: async (callback: (lng: string) => void) => {
+//     try {
+//       const SavedLanguage = await AsyncStorage.getItem('LANGUAGE');
+//       if (SavedLanguage) {
+//         callback(SavedLanguage);
+//       }
+//     } catch (error) {
+//       console.error('Error getting language from AsyncStorage:', error);
+//       callback('ar');
+//     }
+//     callback('ar');
+//   },
+//   cacheUserLanguage: async (lng: string) => {
+//     try {
+//       await AsyncStorage.setItem('LANGUAGE', lng);
+//     } catch (error) {
+//       console.error('Error getting language from AsyncStorage:', error);
+//     }
+//   },
+// };
 
 i18n
   .use({
