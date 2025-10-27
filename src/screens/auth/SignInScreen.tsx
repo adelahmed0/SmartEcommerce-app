@@ -49,8 +49,6 @@ const SignInScreen = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = async (formData: FormData) => {
-    console.log('Sign In Data:', formData);
-
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -58,7 +56,6 @@ const SignInScreen = () => {
         formData.password,
       );
 
-      console.log(JSON.stringify(userCredential, null, 3));
       navigation.navigate('MainAppBottomTabs');
 
       const userDataObj = {
