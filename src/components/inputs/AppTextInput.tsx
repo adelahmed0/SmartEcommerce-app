@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: s(16),
     backgroundColor: AppColors.white,
     width: '100%',
+    color: AppColors.black,
     marginBottom: vs(15),
     shadowColor: AppColors.black,
     shadowOffset: {
